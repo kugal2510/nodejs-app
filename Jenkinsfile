@@ -14,7 +14,7 @@ pipeline {
             steps {
                 // Push Docker image to private regestry Nexus
                 sh 'docker login 79.137.248.252:8083 -u jenkins --password-stdin < ./pass'
-                sh 'docker tag myapp: 79.137.248.252:8083/myapp_nodejs'
+                sh 'docker tag myapp:v1 79.137.248.252:8083/myapp_nodejs'
                 sh 'docker push 79.137.248.252:8083/myapp_nodejs'
             }
         }
