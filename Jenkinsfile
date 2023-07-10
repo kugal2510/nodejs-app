@@ -10,6 +10,7 @@ pipeline {
                 sh 'docker build -t myapp:v1 .'
             }
         }
+        stage('Push') {
             steps {
                 // Pull Docker image to private regestry Nexus
                 sh 'docker login 79.137.248.252:8083 -u jenkins --password-stdin < ./pass'
@@ -18,3 +19,4 @@ pipeline {
             }
         }
     }
+}
