@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HOST = 'tcp://<79.137.248.25>:<8083>'
+        DOCKER_HOST = 'tcp://79.137.248.25:8083'
     }
 
     stages {
