@@ -22,7 +22,8 @@ pipeline {
             steps {
                 // Pull Docker image 
                 sshagent(['jenkins_privat']) {
-                sh 'ssh root@5.42.74.179'
+                sh "ssh -o StrictHostKeyChecking=no root@5.42.74.179 uptime'
+                sh 'ssh -v root@5.42.74.179'
                 sh 'docker login 79.137.248.252:8083 -u jenkins --password-stdin < ./pass'
                 sh 'docker pull 79.137.248.252:8083/myapp_nodejs'
                 sh 'docker run -it --detach -p 3000:3000 79.137.248.252:8083/myapp_nodejs:latest'
