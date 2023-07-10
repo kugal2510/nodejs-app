@@ -20,6 +20,10 @@ pipeline {
         }
         stage('Pull') {
             steps {
+                options {
+                sshagent(credentials: ['jenkins'])
+                disableStrictHostKeyChecking(true)
+                }
                 // Pull Docker image 
                 sh 'ssh root@5.42.74.179'
                 sh 'docker login 79.137.248.252:8083 -u jenkins --password-stdin < ./pass'
