@@ -12,10 +12,19 @@ pipeline {
         }
         stage('Push') {
             steps {
-                // Pull Docker image to private regestry Nexus
+                // Push Docker image to private regestry Nexus
                 sh 'docker login 79.137.248.252:8083 -u jenkins --password-stdin < ./pass'
-                sh 'docker tag myapp:v1 79.137.248.252:8083/myapp_nodejs'
+                sh 'docker tag myapp: 79.137.248.252:8083/myapp_nodejs'
                 sh 'docker push 79.137.248.252:8083/myapp_nodejs'
+            }
+        }
+        stage('Pull') {
+            steps {
+                // Pull Docker image 
+                sh 'ssh root@5.42.74.179'
+                sh 'docker login 79.137.248.252:8083 -u jenkins --password-stdin < ./pass'
+                sh 'docker pull 79.137.248.252:8083/myapp_nodejs'
+                sh 'docker run -it --detach -p 3000:3000 79.137.248.252:8083/myapp_nodejs:latest'
             }
         }
     }
