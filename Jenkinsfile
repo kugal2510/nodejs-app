@@ -13,9 +13,9 @@ pipeline {
         stage('Push') {
             steps {
                 // Push Docker image to private regestry Nexus
-                sh 'docker login 79.137.206.153:8083 -u jenkins --password-stdin < ./pass'
-                sh 'docker tag myapp:v1 79.137.206.153:8083/myapp_nodejs'
-                sh 'docker push 79.137.206.153:8083/myapp_nodejs'
+                sh 'docker login nexus.kugal.online:8083 -u jenkins --password-stdin < ./pass'
+                sh 'docker tag myapp:v1 nexus.kugal.online:8083/myapp_nodejs'
+                sh 'docker push nexus.kugal.online:8083/myapp_nodejs'
             }
         }
         stage('Pull') {
