@@ -13,9 +13,9 @@ pipeline {
         stage('Push') {
             steps {
                 // Push Docker image to private regestry Nexus
-                sh 'docker login 79.137.248.252:8083 -u jenkins --password-stdin < ./pass'
-                sh 'docker tag myapp:v1 79.137.248.252:8083/myapp_nodejs'
-                sh 'docker push 79.137.248.252:8083/myapp_nodejs'
+                sh 'docker login 79.137.206.153:8083 -u jenkins --password-stdin < ./pass'
+                sh 'docker tag myapp:v1 79.137.206.153:8083/myapp_nodejs'
+                sh 'docker push 79.137.206.153:8083/myapp_nodejs'
             }
         }
         stage('Pull') {
@@ -24,7 +24,7 @@ pipeline {
                     sshagent(['jenkins_privat']) {
                         sh 'ssh -o StrictHostKeyChecking=no root@5.42.74.179 uptime'
                         sh 'ssh -v root@5.42.74.179 "docker stop nodeJSxxx && docker container rm nodeJSxxx"'
-                        sh 'ssh -v root@5.42.74.179 "docker login 79.137.248.252:8083 -u jenkins --password-stdin < ./pass && docker pull 79.137.248.252:8083/myapp_nodejs && docker run -it --name nodeJSxxx --detach -p 3000:3000 79.137.248.252:8083/myapp_nodejs:latest"'
+                        sh 'ssh -v root@5.42.74.179 "docker login 79.137.206.153:8083 -u jenkins --password-stdin < ./pass && docker pull 79.137.206.153:8083/myapp_nodejs && docker run -it --name nodeJSxxx --detach -p 3000:3000 79.137.206.153:8083/myapp_nodejs:latest"'
                     }
                 }
             }
